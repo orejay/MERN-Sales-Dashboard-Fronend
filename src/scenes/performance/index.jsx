@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useGetUserPerformanceQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
@@ -10,7 +10,7 @@ const Performance = () => {
   const theme = useTheme();
   const userId = useSelector((state) => state.global.userId);
   const { data, isLoading } = useGetUserPerformanceQuery(userId);
-  console.log("data", data);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const columns = [
     {
@@ -40,7 +40,7 @@ const Performance = () => {
   ];
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}>
       <Header
         title="PERFORMANCE"
         subtitle="Track Your Affiliate Sales Performance Here"

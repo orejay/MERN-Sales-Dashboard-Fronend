@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useGetAdminsQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/Header";
@@ -8,7 +8,7 @@ import CustomColumnMenu from "components/DataGridCustomColumnMenu";
 const Admin = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetAdminsQuery();
-  console.log("data", data);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const columns = [
     {
@@ -48,7 +48,7 @@ const Admin = () => {
   ];
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}>
       <Header title="ADMINS" subtitle="Managing Admins and List of Admins" />
       <Box
         mt="40px"

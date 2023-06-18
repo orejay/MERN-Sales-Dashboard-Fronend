@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useGetSalesQuery } from "state/api";
 import Header from "components/Header";
 
 const Monthly = () => {
   const { data, isLoading } = useGetSalesQuery();
   const theme = useTheme();
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const [formatteddata] = useMemo(() => {
     if (!data) return [];
@@ -40,7 +41,10 @@ const Monthly = () => {
   }, [data]);
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}
+      pb={isMobile ? "130px" : ""}
+    >
       <Header title="MONTHLY SALES" subtitle="Chart of Monthly Sales" />
       <Box height="75vh">
         {data ? (

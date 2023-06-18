@@ -24,6 +24,7 @@ import StatBox from "components/StatBox";
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreen = useMediaQuery("(min-width: 1200px)");
+  const isMobile = useMediaQuery("(max-width: 600px)");
   const { data, isLoading } = useGetDashboardQuery();
 
   const columns = [
@@ -54,10 +55,14 @@ const Dashboard = () => {
   ];
 
   return (
-    <Box m="1.5rem 2.5rem">
-      <FlexBetween>
+    <Box m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}>
+      <Box
+        display={isMobile ? "" : "flex"}
+        justifyContent={isMobile ? "" : "space-between"}
+        alignItems={isMobile ? "" : "center"}
+      >
         <Header title="DASHBOARD" subtitle="Dashboard is the Landing Page" />
-        <Box>
+        <Box display={isMobile ? "none" : ""}>
           <Button
             sx={{
               backgroundColor: theme.palette.secondary.light,
@@ -71,7 +76,7 @@ const Dashboard = () => {
             Download Reports
           </Button>
         </Box>
-      </FlexBetween>
+      </Box>
       <Box
         sx={{
           mt: "20px",

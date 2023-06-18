@@ -1,18 +1,29 @@
 import React, { useState } from "react";
-import { Box, Select, FormControl, MenuItem, InputLabel } from "@mui/material";
+import {
+  Box,
+  Select,
+  FormControl,
+  MenuItem,
+  InputLabel,
+  useMediaQuery,
+} from "@mui/material";
 import Header from "components/Header";
 import OverviewChart from "components/OverviewChart";
 
 const Overview = () => {
   const [view, setView] = useState("units");
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}
+      pb={isMobile ? "150px" : ""}
+    >
       <Header
         title="OVERVIEW"
         subtitle="Overview of General Revenue and Profit"
       />
-      <Box height="75vh">
+      <Box height="75vh" width="100%">
         <FormControl
           sx={{
             mt: "1rem",
@@ -28,7 +39,7 @@ const Overview = () => {
             <MenuItem value="units">Units</MenuItem>
           </Select>
         </FormControl>
-        <OverviewChart view={view} />
+        <OverviewChart view={view} isMobile={isMobile} />
       </Box>
     </Box>
   );

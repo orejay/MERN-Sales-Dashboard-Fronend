@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useGetGeographyQuery } from "state/api";
 import Header from "components/Header";
 import { ResponsiveChoropleth } from "@nivo/geo";
@@ -8,9 +8,13 @@ import { geoData } from "state/geoData";
 const Geography = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetGeographyQuery();
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}
+      pb={isMobile ? "100px" : ""}
+    >
       <Header title="GEOGRAPHY" subtitle="Find Where Your Users are Located" />
       <Box
         mt="40px"

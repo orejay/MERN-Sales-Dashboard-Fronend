@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useGetTransactionsQuery } from "state/api";
 import Header from "components/Header";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 
 const Transactions = () => {
@@ -17,6 +17,7 @@ const Transactions = () => {
     page: 0,
     pageSize: 20,
   });
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const { data, isLoading } = useGetTransactionsQuery({
     page,
@@ -24,7 +25,6 @@ const Transactions = () => {
     sort: JSON.stringify(sort),
     search,
   });
-  console.log("data", data);
 
   const columns = [
     {
@@ -54,7 +54,10 @@ const Transactions = () => {
   ];
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 10px"}
+      pb={isMobile ? "100px" : ""}
+    >
       <Header title={`TRANSACTIONS`} subtitle={`Entire List of Transactions`} />
       <Box
         height="80vh"

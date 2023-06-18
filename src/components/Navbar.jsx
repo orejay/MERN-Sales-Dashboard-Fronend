@@ -21,6 +21,7 @@ import {
   MenuItem,
   Toolbar,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import profileImage from "../assets/profile.jpg";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +30,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, user }) => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const theme = useTheme();
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
@@ -48,9 +50,9 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, user }) => {
           </IconButton>
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
-            borderRadius={"9px"}
-            gap={"3rem"}
-            p="0.1rem 1.5rem"
+            borderRadius={!isMobile ? "9px" : "4px"}
+            gap={!isMobile ? "3rem" : "1rem"}
+            p={!isMobile ? "0.1rem 1.5rem" : "0.1rem 0.3rem"}
           >
             <InputBase placeholder="Search..." />
             <IconButton>
@@ -65,9 +67,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, user }) => {
             ) : (
               <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
-          </IconButton>
-          <IconButton>
-            <SettingsOutlined />
           </IconButton>
           <FlexBetween>
             <Button
@@ -115,6 +114,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, user }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
+              <MenuItem>Settings</MenuItem>
               <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>

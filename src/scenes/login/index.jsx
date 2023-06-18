@@ -44,13 +44,11 @@ const Login = () => {
       body: JSON.stringify(body),
     })
       .then((response) => {
-        console.log(response);
-        response.ok ? Navigate("/dashboard") : setLoginError(true);
         return response.json();
       })
       .then((data) => {
         dispatch(setUser(data.details));
-        console.log(data);
+        data.details.id ? Navigate("/dashboard") : setLoginError(true);
       })
       .catch((error) => {
         console.log(error);
@@ -94,9 +92,13 @@ const Login = () => {
         <Box width="100%" sx={{ display: "flex", justifyContent: "end" }}>
           <Button
             variant="contained"
-            backgroundColor={theme.palette.background.alt}
             onClick={() => dispatch(setPrompt(false))}
-            sx={{ p: "5px", fontSize: "12px", letterSpacing: "1px" }}
+            sx={{
+              backgroundColor: theme.palette.background.alt,
+              p: "5px",
+              fontSize: "12px",
+              letterSpacing: "1px",
+            }}
             endIcon={<ThumbUpSharp sx={{ paddingRight: "5px" }} />}
           >
             Got it!

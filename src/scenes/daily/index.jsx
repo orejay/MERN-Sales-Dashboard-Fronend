@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useGetSalesQuery } from "state/api";
 import Header from "components/Header";
 import DatePicker from "react-datepicker";
@@ -11,6 +11,7 @@ const Daily = () => {
   const [endDate, setEndDate] = useState(new Date("2021-03-01"));
   const { data, isLoading } = useGetSalesQuery();
   const theme = useTheme();
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const [formatteddata] = useMemo(() => {
     if (!data) return [];
@@ -49,10 +50,17 @@ const Daily = () => {
   }, [data, startDate, endDate]);
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}
+      pb={isMobile ? "130px" : ""}
+    >
       <Header title="DAILY SALES" subtitle="Chart of Daily Sales" />
       <Box height="75vh">
-        <Box display="flex" justifyContent="flex-end">
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          gap={isMobile ? "10px" : ""}
+        >
           <Box>
             <DatePicker
               selected={startDate}
@@ -110,7 +118,12 @@ const Daily = () => {
               },
             }}
             colors={{ datum: "color" }}
-            margin={{ top: 50, right: 50, bottom: 70, left: 60 }}
+            margin={{
+              top: 50,
+              right: !isMobile ? 50 : 6,
+              bottom: 70,
+              left: !isMobile ? 60 : 35,
+            }}
             xScale={{ type: "point" }}
             yScale={{
               type: "linear",
@@ -131,7 +144,7 @@ const Daily = () => {
               tickRotation: 90,
               legend: "Month",
               legendOffset: 60,
-              legendPosition: "middle",
+              legendPosition: !isMobile ? "middle" : "start",
             }}
             axisLeft={{
               orient: "left",
@@ -140,8 +153,8 @@ const Daily = () => {
               tickPadding: 5,
               tickRotation: 0,
               legend: "Total",
-              legendOffset: -50,
-              legendPosition: "middle",
+              legendOffset: !isMobile ? -50 : -30,
+              legendPosition: !isMobile ? "middle" : "start",
             }}
             enableGridX={false}
             enableGridY={false}
@@ -153,7 +166,7 @@ const Daily = () => {
             useMesh={true}
             legends={[
               {
-                anchor: "top-right",
+                anchor: !isMobile ? "top-right" : "top-left",
                 direction: "column",
                 justify: false,
                 translateX: 50,

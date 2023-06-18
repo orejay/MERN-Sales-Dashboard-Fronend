@@ -3,7 +3,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { useGetSalesQuery } from "state/api";
 
-const OverviewChart = ({ isDashboard = false, view }) => {
+const OverviewChart = ({ isDashboard = false, isMobile = false, view }) => {
   const theme = useTheme();
 
   const { data, isLoading } = useGetSalesQuery();
@@ -84,7 +84,12 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           },
         },
       }}
-      margin={{ top: 20, right: 50, bottom: 50, left: 70 }}
+      margin={{
+        top: 20,
+        right: !isMobile ? 50 : 17,
+        bottom: 50,
+        left: !isMobile ? 70 : 55,
+      }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
@@ -100,14 +105,14 @@ const OverviewChart = ({ isDashboard = false, view }) => {
       axisRight={null}
       axisBottom={{
         format: (v) => {
-          if (isDashboard) return v.slice(0, 3);
+          if (isDashboard || isMobile) return v.slice(0, 3);
           return v;
         },
         orient: "bottom",
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? "" : "Month",
+        legend: isDashboard || isMobile ? "" : "Month",
         legendOffset: 36,
         legendPosition: "middle",
       }}
@@ -117,9 +122,10 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard
-          ? ""
-          : `Total ${view === "sales" ? "Revenue" : "Units"} for Year`,
+        legend:
+          isDashboard || isMobile
+            ? ""
+            : `Total ${view === "sales" ? "Revenue" : "Units"} for Year`,
         legendOffset: -60,
         legendPosition: "middle",
       }}
@@ -132,7 +138,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
       pointLabelYOffset={-12}
       useMesh={true}
       legends={
-        !isDashboard
+        !isDashboard || !isMobile
           ? [
               {
                 anchor: "bottom-right",
