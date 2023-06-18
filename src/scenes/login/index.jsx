@@ -18,7 +18,6 @@ import {
 } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginQuery } from "state/api";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, setPrompt } from "state";
 
