@@ -9,6 +9,7 @@ import {
   TextField,
   Typography,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import {
   VisibilityOff,
@@ -23,6 +24,7 @@ import { setUser, setPrompt } from "state";
 
 const Login = () => {
   const theme = useTheme();
+  const isNonMobile = useMediaQuery("(min-width: 600px)");
   const Navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   //   const [showPrompt, setShowPrompt] = useState(true);
@@ -66,7 +68,7 @@ const Login = () => {
       onClick={() => dispatch(setPrompt(false))}
     >
       <Box
-        width="30%"
+        width={isNonMobile ? "30%" : "90%"}
         gap="20px"
         position="absolute"
         sx={{
@@ -102,11 +104,11 @@ const Login = () => {
         </Box>
       </Box>
       <Box
+        width={isNonMobile ? "35%" : "92%"}
         sx={{
-          p: "50px",
+          p: isNonMobile ? "50px" : "30px",
           borderRadius: "5px",
           backgroundColor: theme.palette.background.alt,
-          width: "35%",
           display: "flex",
           flexDirection: "column",
           opacity: showPrompt ? "15%" : "100%",
@@ -160,7 +162,11 @@ const Login = () => {
           variant="contained"
           backgroundColor={theme.palette.background.alt}
           //   onClick={login}
-          sx={{ p: "8px", fontSize: "16px", letterSpacing: "1px" }}
+          sx={{
+            p: isNonMobile ? "8px" : "6px",
+            fontSize: isNonMobile ? "16px" : "",
+            letterSpacing: "1px",
+          }}
           onClick={login}
         >
           LOGIN
