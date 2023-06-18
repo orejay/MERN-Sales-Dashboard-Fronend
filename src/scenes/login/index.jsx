@@ -91,7 +91,7 @@ const Login = () => {
           <Typography>Password: password</Typography>
         </Box>
         <Box>
-          <WarningRounded sx={{ color: "#EE1251" }} />
+          <WarningRounded sx={{ color: "#EE1251", fontSize: "32px" }} />
           <Typography color={theme.palette.secondary.main}>
             Please be patient. Login might not happen immediately the first time
             you load this page because the api is on a free tier and would go to
