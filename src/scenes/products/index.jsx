@@ -88,7 +88,10 @@ const Products = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <Box m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}>
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}
+      pb={isMobile ? "130px" : ""}
+    >
       <Header title="PRODUCTS" subtitle="See your list of products" />
       {data || !isLoading ? (
         <Box

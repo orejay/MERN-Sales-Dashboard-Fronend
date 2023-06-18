@@ -16,6 +16,7 @@ import {
   Visibility,
   Person2,
   ThumbUpSharp,
+  WarningRounded,
 } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -88,6 +89,14 @@ const Login = () => {
           </Typography>
           <Typography>Username: Ore</Typography>
           <Typography>Password: password</Typography>
+        </Box>
+        <Box>
+          <WarningRounded sx={{ color: "#EE1251" }} />
+          <Typography color={theme.palette.secondary.main}>
+            Please be patient. Login might not happen immediately the first time
+            you load this page because the api is on a free tier and would go to
+            sleep when inactive.
+          </Typography>
         </Box>
         <Box width="100%" sx={{ display: "flex", justifyContent: "end" }}>
           <Button
