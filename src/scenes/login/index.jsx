@@ -19,16 +19,41 @@ import {
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginQuery } from "state/api";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser, setPrompt } from "state";
 
 const Login = () => {
   const theme = useTheme();
   const Navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [showPrompt, setShowPrompt] = useState(true);
+  //   const [showPrompt, setShowPrompt] = useState(true);
+  const showPrompt = useSelector((state) => state.global.prompt);
+  const [loginError, setLoginError] = useState(false);
   const [body, setBody] = useState({ username: "", password: "" });
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const dispatch = useDispatch();
 
   const login = () => {
-    Navigate("/dashboard");
+    console.log(body);
+    fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        console.log(response);
+        response.ok ? Navigate("/dashboard") : setLoginError(true);
+        return response.json();
+      })
+      .then((data) => {
+        dispatch(setUser(data.details));
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -39,7 +64,7 @@ const Login = () => {
         justifyContent: "center",
         alignItems: "center",
       }}
-      onClick={() => setShowPrompt(false)}
+      onClick={() => dispatch(setPrompt(false))}
     >
       <Box
         width="30%"
@@ -69,7 +94,7 @@ const Login = () => {
           <Button
             variant="contained"
             backgroundColor={theme.palette.background.alt}
-            onClick={() => setShowPrompt(false)}
+            onClick={() => dispatch(setPrompt(false))}
             sx={{ p: "5px", fontSize: "12px", letterSpacing: "1px" }}
             endIcon={<ThumbUpSharp sx={{ paddingRight: "5px" }} />}
           >

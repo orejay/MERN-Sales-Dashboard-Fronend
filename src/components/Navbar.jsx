@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material";
 import FlexBetween from "./FlexBetween";
 import { useDispatch } from "react-redux";
-import { setMode } from "state";
+import { setMode, setUser } from "state";
 import {
   AppBar,
   Button,
@@ -23,15 +23,21 @@ import {
   useTheme,
 } from "@mui/material";
 import profileImage from "../assets/profile.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen, user }) => {
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+  const handleLogout = () => {
+    dispatch(setUser({}));
+    Navigate("/");
+  };
 
   return (
     <AppBar sx={{ position: "static", background: "none", boxShadow: "none" }}>
@@ -109,7 +115,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen, user }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>
