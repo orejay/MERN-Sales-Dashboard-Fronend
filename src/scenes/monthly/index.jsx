@@ -46,7 +46,7 @@ const Monthly = () => {
       pb={isMobile ? "130px" : ""}
     >
       <Header title="MONTHLY SALES" subtitle="Chart of Monthly Sales" />
-      <Box height="75vh">
+      <Box height={!isMobile ? "75vh" : "78vh"}>
         {data ? (
           <ResponsiveLine
             data={formatteddata}
@@ -84,7 +84,12 @@ const Monthly = () => {
               },
             }}
             colors={{ datum: "color" }}
-            margin={{ top: 50, right: 50, bottom: 70, left: 60 }}
+            margin={{
+              top: 50,
+              right: !isMobile ? 50 : 6,
+              bottom: 70,
+              left: !isMobile ? 60 : 43,
+            }}
             xScale={{ type: "point" }}
             yScale={{
               type: "linear",
@@ -104,8 +109,8 @@ const Monthly = () => {
               tickPadding: 5,
               tickRotation: 90,
               legend: "Month",
-              legendOffset: 60,
-              legendPosition: "middle",
+              legendOffset: 65,
+              legendPosition: !isMobile ? "middle" : "start",
             }}
             axisLeft={{
               orient: "left",
@@ -114,8 +119,8 @@ const Monthly = () => {
               tickPadding: 5,
               tickRotation: 0,
               legend: "Total",
-              legendOffset: -50,
-              legendPosition: "middle",
+              legendOffset: -30,
+              legendPosition: !isMobile ? "middle" : "start",
             }}
             enableGridX={false}
             enableGridY={false}
@@ -127,7 +132,7 @@ const Monthly = () => {
             useMesh={true}
             legends={[
               {
-                anchor: "top-right",
+                anchor: "top-left",
                 direction: "column",
                 justify: false,
                 translateX: 50,
