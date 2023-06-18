@@ -55,7 +55,7 @@ const Sidebar = ({
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
-  isNoneMobile,
+  isNonMobile,
 }) => {
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
@@ -80,7 +80,7 @@ const Sidebar = ({
               color: theme.palette.secondary[200],
               backgroundColor: theme.palette.background.alt,
               boxSizing: "border-box",
-              borderWidth: isNoneMobile ? 0 : "2px",
+              borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
             },
           }}
@@ -93,7 +93,7 @@ const Sidebar = ({
                     ECOMVISION
                   </Typography>
                 </Box>
-                {isNoneMobile && (
+                {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
                     <ChevronLeftOutlined />
                   </IconButton>
