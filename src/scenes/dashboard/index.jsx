@@ -55,7 +55,10 @@ const Dashboard = () => {
   ];
 
   return (
-    <Box m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}>
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}
+      pb={isMobile ? "130px" : ""}
+    >
       <Box
         display={isMobile ? "" : "flex"}
         justifyContent={isMobile ? "" : "space-between"}
