@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const Performance = () => {
   const theme = useTheme();
-  const userId = useSelector((state) => state.global.userId);
+  const userId = useSelector((state) => state.global.user.id);
   const { data, isLoading } = useGetUserPerformanceQuery(userId);
   const isMobile = useMediaQuery("(max-width: 600px)");
 
@@ -40,7 +40,10 @@ const Performance = () => {
   ];
 
   return (
-    <Box m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}>
+    <Box
+      m={!isMobile ? "1.5rem 2.5rem" : "20px 15px"}
+      pb={isMobile ? "130px" : ""}
+    >
       <Header
         title="PERFORMANCE"
         subtitle="Track Your Affiliate Sales Performance Here"
