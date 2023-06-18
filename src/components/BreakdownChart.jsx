@@ -1,11 +1,12 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useGetSalesQuery } from "state/api";
 
 const BreakdownChart = ({ isDashboard = false }) => {
   const { data, isLoading } = useGetSalesQuery();
   const theme = useTheme();
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   if (!data || isLoading) return "Loading...";
 
@@ -130,7 +131,7 @@ const BreakdownChart = ({ isDashboard = false }) => {
             : "translate(-50%,-100%)",
         }}
       >
-        <Typography variant="h6">
+        <Typography variant="h6" fontSize={isMobile ? "12px" : ""}>
           {!isDashboard && "Total:"} ${data.yearlySalesTotal}
         </Typography>
       </Box>

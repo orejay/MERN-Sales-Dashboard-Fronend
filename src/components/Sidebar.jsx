@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import {
   SettingsOutlined,
@@ -18,13 +19,12 @@ import {
   ShoppingCartOutlined,
   AdminPanelSettingsOutlined,
   TrendingUpOutlined,
-  ChevronLeftOutlined,
   ChevronRightOutlined,
   HomeOutlined,
   Groups2Outlined,
   ReceiptLongOutlined,
-  PublicOffOutlined,
   TodayOutlined,
+  Menu,
   CalendarViewMonthOutlined,
   PieChartOutlined,
   PublicOutlined,
@@ -61,6 +61,7 @@ const Sidebar = ({
   const [active, setActive] = useState("");
   const theme = useTheme();
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
     setActive(pathname.substring(1));
@@ -95,7 +96,7 @@ const Sidebar = ({
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                    <ChevronLeftOutlined />
+                    <Menu sx={{ ml: "30px" }} />
                   </IconButton>
                 )}
               </FlexBetween>
@@ -117,6 +118,7 @@ const Sidebar = ({
                       onClick={() => {
                         navigate(`/${lcText}`);
                         setActive(lcText);
+                        if (isMobile) setIsSidebarOpen(false);
                       }}
                       sx={{
                         backgroundColor:

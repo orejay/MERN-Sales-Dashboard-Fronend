@@ -28,11 +28,6 @@ const Dashboard = () => {
   const { data, isLoading } = useGetDashboardQuery();
 
   const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 1,
-    },
     { field: "userId", headerName: "User ID", flex: 1 },
     {
       field: "createdAt",
