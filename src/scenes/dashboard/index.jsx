@@ -26,6 +26,7 @@ const Dashboard = () => {
   const isNonMediumScreen = useMediaQuery("(min-width: 1200px)");
   const isMobile = useMediaQuery("(max-width: 600px)");
   const { data, isLoading } = useGetDashboardQuery();
+  console.log(data);
 
   const columns = [
     { field: "userId", headerName: "User ID", flex: 1 },
@@ -114,7 +115,7 @@ const Dashboard = () => {
           p="1rem"
           borderRadius="0.55rem"
         >
-          <OverviewChart view="sales" isDashboard={true} />
+          <OverviewChart view="sales" isDashboard={true} isMobile={isMobile} />
         </Box>
         <StatBox
           title="Monthly Sales"

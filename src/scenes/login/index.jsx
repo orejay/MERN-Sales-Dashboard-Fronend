@@ -60,7 +60,7 @@ const Login = () => {
     <Box
       sx={{
         display: "flex",
-        height: "100vh",
+        height: isNonMobile ? "100vh" : "100%",
         justifyContent: "center",
         alignItems: "center",
       }}

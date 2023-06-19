@@ -100,7 +100,7 @@ const OverviewChart = ({ isDashboard = false, isMobile = false, view }) => {
       }}
       yFormat=" >-.2f"
       curve="catmullRom"
-      enableArea={isDashboard}
+      enableArea={isDashboard && !isMobile}
       axisTop={null}
       axisRight={null}
       axisBottom={{

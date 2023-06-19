@@ -25,6 +25,7 @@ import {
   ReceiptLongOutlined,
   TodayOutlined,
   Menu,
+  CloseRounded,
   CalendarViewMonthOutlined,
   PieChartOutlined,
   PublicOutlined,
@@ -96,7 +97,9 @@ const Sidebar = ({
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                    <Menu sx={{ ml: "30px" }} />
+                    <CloseRounded
+                      sx={{ ml: "24px", color: "#EE1251", fontSize: "28px" }}
+                    />
                   </IconButton>
                 )}
               </FlexBetween>
