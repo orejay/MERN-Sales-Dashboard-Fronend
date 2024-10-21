@@ -36,7 +36,6 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const login = () => {
-    console.log(body);
     fetch(`${baseUrl}/auth/login`, {
       method: "POST",
       headers: {
